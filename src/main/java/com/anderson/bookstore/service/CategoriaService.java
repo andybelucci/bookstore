@@ -5,6 +5,7 @@ import com.anderson.bookstore.dtos.CategoriaDTO;
 import com.anderson.bookstore.repositories.CategoriaRepository;
 import com.anderson.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,10 +32,17 @@ public class CategoriaService {
     }
 
 
+
     public Categoria update(Integer id, CategoriaDTO objDto) {
         Categoria obj = findById(id);
         obj.setNome(objDto.getNome());
         obj.setDescricao(objDto.getDescricao());
         return repository.save(obj);
+    }
+
+    public void delete(Integer id) {
+        findById(id);
+        repository.deleteById(id);
+        ResponseEntity.noContent().build();
     }
 }
