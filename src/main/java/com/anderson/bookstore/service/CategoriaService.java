@@ -1,15 +1,17 @@
 package com.anderson.bookstore.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
+
 import com.anderson.bookstore.domain.Categoria;
 import com.anderson.bookstore.dtos.CategoriaDTO;
 import com.anderson.bookstore.repositories.CategoriaRepository;
+import com.anderson.bookstore.service.exceptions.DataIntegratyViolationException;
 import com.anderson.bookstore.service.exceptions.ObjectNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -40,9 +42,13 @@ public class CategoriaService {
         return repository.save(obj);
     }
 
-    public void delete(Integer id) {
+    public void delete(Integer id) throws DataIntegratyViolationException {
         findById(id);
-        repository.deleteById(id);
-        ResponseEntity.noContent().build();
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegratyViolationException("Categoria não pode ser delatada! Possui livros associados");
+        }
+
     }
 }
