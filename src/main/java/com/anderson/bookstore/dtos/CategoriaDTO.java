@@ -1,14 +1,15 @@
 package com.anderson.bookstore.dtos;
 
-import com.anderson.bookstore.domain.Categoria;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotEmpty;
-import java.io.Serial;
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.anderson.bookstore.domain.Categoria;
+
 public class CategoriaDTO implements Serializable {
-    @Serial
+    
     private static final long serialVersionUID = 1L;
 
     private Integer id;

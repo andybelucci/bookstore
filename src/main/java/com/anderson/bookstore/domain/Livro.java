@@ -1,6 +1,5 @@
 package com.anderson.bookstore.domain;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Livro implements Serializable{
-    @Serial
+
     private static final long serialVersionUID = 1L;
 
     @Id
